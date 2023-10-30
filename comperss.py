@@ -14,7 +14,6 @@ def get_alphabet(file_string):
 def encode_fixed_length(text,alphabet,):
 	
 	code_length = (len(alphabet)-1).bit_length()
-	print(f"Dlugosc {code_length}")
 	encoded_text = ''
 	for char in text:
 		char_index = alphabet.index(char)
@@ -49,18 +48,16 @@ def change_to_bits(message):
 	return coded_message
 
 
-def start(file_string):
-	#file_string = "abbbbbcddddcccaaaa"
+def start_compress(file_string):
 	
 	alphabet = get_alphabet(file_string)
 	encoded_message = encode_fixed_length(file_string, alphabet)
 	return_value = chr(len(alphabet)) +  "".join(alphabet) + change_to_bits(encoded_message)
+	print(return_value)
 	return return_value
  
 
  
  
  
-	# encoded_message = "".join(alphabet) + encoded_message
-	# print(encoded_message)
 	
