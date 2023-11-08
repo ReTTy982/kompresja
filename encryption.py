@@ -7,11 +7,15 @@ def generate_key(size):
 
 def encrypt(text,key):
     encrypted = ""
-
+    key_index = 0
     for i in range(len(text)):
+        print(f"{key_index} {i}")
         x = format(ord(text[i]),'08b')
-        y = format(ord(key[i]),'08b')
+        if (key_index == len(key)):
+            key_index = 0
+        y = format(ord(key[key_index]),'08b')
         encrypted += xor(x,y)
+        key_index += 1
     return bytes_to_chr(encrypted)
 
 
@@ -39,6 +43,4 @@ def bytes_to_chr(text):
         message += chr(int(byte,2))
     return message
 
-message = "asdijasiodj"
-key=generate_key(len(message))
-coded_message= encrypt(message,key)
+

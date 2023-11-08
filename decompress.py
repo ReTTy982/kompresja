@@ -5,10 +5,6 @@ def decompress_text(text):
     binary_string = create_binary(text[alphabet_length+1:])
     bit_for_sign = (alphabet_length-1).bit_length()
     final_string = ""
-
-    for character in text:
-        byte = format(ord(character),'008b')
-        #for pair in byte:
     
     for i in range(0,len(binary_string),bit_for_sign):
         chunk = binary_string[i:i+bit_for_sign]
@@ -25,6 +21,3 @@ def create_binary(text):
     output_string = output_string[3:]
     output_string = output_string[:-filler]
     return output_string
-
-def match_dictionary(bits,alphabet):
-    return 
