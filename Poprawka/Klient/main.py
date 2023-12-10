@@ -90,6 +90,32 @@ class AppManager:
     username = None
        
     def run(self):
+        user_input = input("Choose option")
+        match user_input:
+            case '1':
+                username = input("Username: ")
+                password = input("Password: ")
+                self.register_user(username,password)
+            case '2':
+                username = input("Username: ")
+                password = input("Password: ")
+                self.login_user(username,password)
+            case _:
+                self.run()
+        data = self.get_messages()
+        len_messages = self.init_message_history(data) 
+        
+        receiver = input("Open conversation with: ")
+        self.show_message_history(receiver)
+        
+        while True:
+            user_input = input()
+            self.send_message(receiver,user_input)
+            data = self.get_messages()
+            self.init_message_history(data)
+            self.show_message_history(receiver) 
+        
+            
         #self.register_user("c","1")
         self.login_user("b","1")
         self.send_message("c","ELO!")
@@ -98,7 +124,10 @@ class AppManager:
         self.show_message_history('c')
         
         
-    
+
+        
+        
+        
     def login_user(self,username,password):
         # Generate keys
         key = LocalManager.generate_rsa_key()
@@ -162,6 +191,7 @@ class AppManager:
                 self.check_contact_book(sender)
                 contact = sender
             AppManager.contact_book[contact].append(record)
+        return len(AppManager.contact_book[contact])
             
             
     def check_contact_book(self,contact):
